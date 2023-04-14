@@ -1,6 +1,38 @@
 ## Descripción
 
-Este contrato permite a los usuarios enviar y recibir tokens de manera segura y confiable.
+# Action - welcome
+
+Esta acción da la bienvenida a dos jugadores que desean jugar al juego de tic-tac-toe.
+
+### Parámetros
+
+- `host`: el nombre de usuario del anfitrión
+- `opponent`: el nombre de usuario del oponente
+
+### Precondiciones
+
+- El contrato debe estar autorizado para realizar transacciones en nombre de los nombres de usuario del anfitrión y del oponente.
+
+### Resultado
+
+- Los nombres de usuario del anfitrión y del oponente se muestran en la consola del contrato.
+
+# Action - hi
+
+Esta acción agrega un nuevo usuario a la tabla de vigilancia del contrato.
+
+### Parámetros
+
+- `user`: el nombre de usuario del usuario que se va a agregar a la tabla de vigilancia.
+
+### Precondiciones
+
+- El usuario que llama a la acción debe estar autorizado para realizar transacciones en nombre del contrato.
+
+### Resultado
+
+- El nombre de usuario del usuario se agrega a la tabla de vigilancia del contrato.
+
 
 ## Términos y condiciones
 
