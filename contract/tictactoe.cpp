@@ -11,6 +11,7 @@ CONTRACT tictactoe:public contract{
 			print("welcome ",host);
 			print("\nAnd ",opponent);
 		}
+	
 
 	//guardando los nombres de usuario que interactuan con el contrato:
 	TABLE surveillance_record{
@@ -38,6 +39,7 @@ CONTRACT tictactoe:public contract{
 	  ======================
 	*/
 	//el nombre de usuario se guardara en nuestra tabla de indices multiples:
+	
 	ACTION hi(name user){
 		surveillance_index surveillance(get_self(), get_self().value);
 		/*al realizar push action nuevamente, se genera un error, porque cleos nos da un indice repetido en la tabla de indices multiples, 
