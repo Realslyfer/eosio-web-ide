@@ -34,9 +34,9 @@ CONTRACT tictactoe:public contract{
 	
 	typedef eosio::multi_index<name("surveillance"), surveillance_record>surveillance_index;
 
-	/*====================
+	/*=======================
 		creando la instancia:
-	  ======================
+	  =======================
 	*/
 	//el nombre de usuario se guardara en nuestra tabla de indices multiples:
 	
@@ -57,6 +57,6 @@ CONTRACT tictactoe:public contract{
 
 
 	// Agregamos la siguiente línea de código para vincular el archivo Ricardian a nuestro contrato:
-    static constexpr const char* const _ricardian_description = "tictactoe.ricardian";
+    //static constexpr const char* const _ricardian_description = "tictactoe.ricardian";
 
 };
