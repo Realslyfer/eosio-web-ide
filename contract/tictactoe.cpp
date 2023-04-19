@@ -113,7 +113,7 @@ CONTRACT tictactoe:public contract{
 			Ahora usamos find: devuelve un iterador*/
 
 		auto combinat_index = games.get_index<name("hostchall")>();
-		auto existing_game = combinat_index.find(combine_ids(host.value, challenger.value));
+		auto existing_game = combinat_index.find(combinat()/*combine_ids(host.value, challenger.value)*/);
 		check(existing_game == combinat_index.end(), "Este juego ya existe");
 		
 		//Create a new game record
@@ -129,7 +129,7 @@ CONTRACT tictactoe:public contract{
 		//verifico que juego existe en la tabla
 		games_table games(get_self(), get_self().value);
 		auto combinat_index = games.get_index<name("hostchall")>();
-		auto existing_game = combinat_index.find(combine_ids(host.value, challenger.value));
+		auto existing_game = combinat_index.find(combinat()/*combine_ids(host.value, challenger.value)*/);
 		check(existing_game != combinat_index.end(), "Este juego no existe");
 		
 		//verifico que esa accion se llamo por el host o challenger
