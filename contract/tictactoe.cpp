@@ -61,8 +61,8 @@ CONTRACT tictactoe:public contract{
 		.requerir host y challenger y asegurar que no sean el mismo jugador
 		.usar EOSIO check para lograrlo
 		*/
-		check(user!=challenger, "no puede ser la misma persona");
-		print("hello ", user);
+		check(host!=challenger, "no puede ser la misma persona");
+		print("hello ", host);
 		print("\nhello ", challenger);
 		
 	}
@@ -79,7 +79,11 @@ CONTRACT tictactoe:public contract{
 		uint64_t primary_key() const{ return host.value; }
 		
 		//solucion por chatGPT
-		uint64_t combinat() const {return combine_ids(host.value, challenger.value);}
+		//uint64_t combinat() const {return combine_ids(host.value, challenger.value);}
+		uint64_t combinat() const {
+ 			 std::string combined_key = std::to_string(host.value) + std::to_string(challenger.value);
+  				return std::stoull(combined_key);
+		}
 
 		//esto era para serializar la estructura:
 		EOSLIB_SERIALIZE(games_record, (host)(challenger)(timestamp))
@@ -92,7 +96,7 @@ CONTRACT tictactoe:public contract{
 	Y el nombre abstracto de nuestro tipo se llama srv index
 	*/
 	
-	typedef multi_index<name("games"), games_record, indexed_by<name("hostchallenger"), const_mem_fun<games_record, uint64_t, &games_record::combinat>>> games_table;
+	typedef multi_index<name("games"), games_record, indexed_by<name("hostchall"), const_mem_fun<games_record, uint64_t, &games_record::combinat>>> games_table;
 
 	/*====	creando la instancia: ====*/
 	//el nombre de usuario se guardara en nuestra tabla de indices multiples:
@@ -107,7 +111,7 @@ CONTRACT tictactoe:public contract{
 			por lo tanto hay que hacer que la funcion ask verifique si el juego ya fue incluido en la tabla. Primero hay que buscar el registro
 			Ahora usamos find: devuelve un iterador*/
 
-		auto combinat_index = games.get_index<name("hostchallenger")>();
+		auto combinat_index = games.get_index<name("hostchall")>();
 		auto existing_game = combinat_index.find(combine_ids(host.value, challenger.value));
 		check(existing_game == combinat_index.end(), "Este juego ya existe");
 		
@@ -123,7 +127,7 @@ CONTRACT tictactoe:public contract{
 	ACTION close(name host, name challenger){
 		//verifico que juego existe en la tabla
 		games_table games(get_self(), get_self().value);
-		auto combinat_index = games.get_index<name("hostchallenger")>();
+		auto combinat_index = games.get_index<name("hostchall")>();
 		auto existing_game = combinat_index.find(combine_ids(host.value, challenger.value));
 		check(existing_game != combinat_index.end(), "Este juego no existe");
 		
