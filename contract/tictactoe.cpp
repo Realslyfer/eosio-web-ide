@@ -1,5 +1,6 @@
 #include<eosio/eosio.hpp>
 #include<eosio/system.hpp>
+#include <eosio/crypto.hpp>
 using namespace eosio;
 
 CONTRACT tictactoe:public contract{
